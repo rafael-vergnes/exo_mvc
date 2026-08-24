@@ -6,10 +6,13 @@ class ViewArticle {
     private ViewFooter $viewFooter;
     private ViewHeader $viewHeader;
 
-    public function setDataArticles(array $newData){
-        $this->dataArticles = $newData;
+    public function __construct() {
         $this->viewFooter = new ViewFooter();
         $this->viewHeader = new ViewHeader("Articles");
+    }
+
+    public function setDataArticles(array $newData){
+        $this->dataArticles = $newData;
     }
 
     public function display():void{

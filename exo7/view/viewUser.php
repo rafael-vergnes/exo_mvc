@@ -7,12 +7,14 @@ class ViewUser{
     private ViewHeader $viewHeader;
 
     //CONSTRUCTEUR
+    public function __construct() {
+        $this->viewFooter = new ViewFooter();
+        $this->viewHeader = new ViewHeader("Utilisateurs");
+    }
 
     //GETTER ET SETTER
     public function setDataUsers(array $newData){
         $this->dataUsers = $newData;
-        $this->viewFooter = new ViewFooter();
-        $this->viewHeader = new ViewHeader("Utilisateurs");
     }
 
     //METHODS
