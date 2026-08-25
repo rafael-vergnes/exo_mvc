@@ -23,7 +23,7 @@ class ViewUser{
         ob_start();
 
         foreach($this->dataUsers as $row){
-                $this->listUsers .="<li>Pseudo :".$row['pseudo']." - Email : ".$row['email']." - Role :".$row['role']."</li>";
+                $this->listUsers .="<li>Pseudo : ".$row['pseudo']." - Email : ".$row['email']." - Role : ".$row['role']."</li>";
         };
                 
         echo "<main>
