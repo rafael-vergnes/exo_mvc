@@ -34,6 +34,11 @@ class ModelUser extends Model{
         return $this;
     }
 
+    public function setId(int $newId):self{
+        $this->id = $newId;
+        return $this;
+    }
+
     //METHODS
     public function findAll():?array{
         try{
@@ -101,6 +106,19 @@ class ModelUser extends Model{
             $req->bindParam(1, $this->email, PDO::PARAM_STR);
             $req->bindParam(2, $this->pseudo, PDO::PARAM_STR);
             $req->bindParam(3, $this->password, PDO::PARAM_STR);
+
+            $req->execute();
+
+        } catch(EXCEPTION $error) {
+            die($error->getMessage());
+        }
+    }
+
+    public function delete() {
+        try{
+            $req = $this->getBDD()->prepare("DELETE FROM `user` WHERE id = ?");
+
+            $req->bindParam(1, $this->id, PDO::PARAM_STR);
 
             $req->execute();
 

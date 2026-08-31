@@ -96,7 +96,7 @@ class ControllerUser extends Controller{
                 $this->getView()->setMessage('Ce compte existe déjà');
                 return;
             }
-            $this->getModel()->setPseudo($pseudo)->setEmail($email)->setPassword($password)->addUser();
+            $this->getModel()->setPseudo($pseudo)->setEmail($email)->setPassword(password_hash($password, PASSWORD_DEFAULT))->addUser();
             $this->getView()->setMessage('Utilisateur inscrit !');
             return;
         }

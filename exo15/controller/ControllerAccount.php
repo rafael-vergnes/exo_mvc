@@ -3,6 +3,8 @@
 namespace Controller;
 
 use Controller\Controller;
+use View\View;
+use Utils\Utils;
 
 class ControllerAccount extends Controller {
     //ATTRIBUTS
@@ -25,5 +27,30 @@ class ControllerAccount extends Controller {
 
         //3. Affichage de la View
         $this->getView()->displayAll();
+    }
+
+    public function deleteAccount() {
+        if(isset($_POST['submitSuppression'])){
+            if(empty($_POST['pseudo']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['confirm_password'])){
+                $this->getView()->setMessage('Veuillez remplir tous les champs');
+                return;
+            }
+            if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+                $this->getView()->setMessage('Email au mauvais format');
+                return;
+            }
+            $pseudo = Utils::sanitize($_POST['pseudo']);
+            $email = Utils::sanitize($_POST['email']);
+            $password = Utils::sanitize($_POST['password']);
+            $confirm_password = Utils::sanitize($_POST['confirm_password']);
+            if($password != $confirm_password) {
+                $this->getView()->setMessage('Les mots de passe doivent être identiques');
+                return;
+            }
+            $this->getModel()->setId($_SESSION["id"])->delete();
+            session_destroy();
+            header('location:'.$_ENV['utilisateurs']);
+            exit;
+        }
     }
 }

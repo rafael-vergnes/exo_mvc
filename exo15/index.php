@@ -49,6 +49,7 @@ switch ($path) {
     case $_ENV['moncompte'] :
         //Affichage de la page
         $controller = new ControllerAccount(new ModelUser(Utils::connect()), new ViewAccount("Mon Compte",""));
+        $controller->deleteAccount();
         $controller->render();
         break;
 
@@ -68,7 +69,7 @@ switch ($path) {
         //3. Lui demander de lancer findByEmail()
         //4. Afficher le résultat
         $controller = new ModelUser(Utils::connect());
-        $controller->addUser();
+        $controller->deleteUser();
         break;
         
     default:

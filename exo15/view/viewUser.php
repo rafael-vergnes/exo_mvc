@@ -24,6 +24,18 @@ class ViewUser extends View{
         // };
 
         ob_start();
+        if(isset($_SESSION) && !empty($_SESSION)){
+?>
+            <h2>Liste des utilisateurs</h2>
+<?php     
+            foreach($this->getData() as $row){
+?>
+                <ul>
+                    <li>Pseudo : <?= $row['pseudo'] ?> - Email : <?= $row['email'] ?> - Role : <?= $row['role'] ?></li>
+                </ul>
+<?php    
+                }
+        } else {
 ?>
             <main>
                 <h2>Connexion</h2>
@@ -33,16 +45,7 @@ class ViewUser extends View{
                         <input type="submit" name="submitConnexion" value="Se Connecter">
                     </form>
                     <p><?php echo $this->message ?></p>
-                <h2>Liste des utilisateurs</h2>
-                <ul>
-<?php  
-                // inclusion de la boucle foreach effectuer en 1. (plus haut) au sein du template HTML mis en buffer
-                foreach($this->getData() as $row){
-?>
-                    <li>Pseudo : <?= $row['pseudo'] ?> - Email : <?= $row['email'] ?> - Role : <?= $row['role'] ?></li>
-<?php    
-                }
-?>
+
                 <h3>Inscription</h3>
                     <form action="" method="POST">
                         <label for="pseudo">Votre pseudo<input type="text" id="pseudo" name="pseudo"></label><br>
@@ -52,9 +55,9 @@ class ViewUser extends View{
                         <input type="submit" name="subscribe" value="S'inscrire">
                     </form>
                     <p><?php echo $this->message ?></p>
-                </ul>
             </main>
 <?php
+        };
         //Récupération du buffer dans la propriété $this->buffer
         $this->setBuffer(ob_get_clean());
         return $this;
