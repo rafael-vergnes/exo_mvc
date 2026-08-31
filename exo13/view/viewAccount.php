@@ -3,10 +3,18 @@
 namespace View;
 
 class ViewAccount extends View{
-    private array $dataSession;
+    private $id;
+    private $pseudo;
+    private $email;
+    private $role;
+    private $created_at;
 
-    public function setDataSession(array $newDataSession):array {
-        $this->dataSession = $newDataSession;
+    public function setDataSession ($newId, $newPseudo, $newEmail, $newRole, $newCreated_at) {
+        $this->id = $newId;
+        $this->pseudo = $newPseudo;
+        $this->email = $newEmail;
+        $this->role = $newRole;
+        $this->created_at = $newCreated_at;
         return $this;
     }
 
@@ -19,13 +27,11 @@ class ViewAccount extends View{
                 <ul>
 <?php
                     //Boucle d'affichage du tableau de donnée des articles au sein du template HTML
-                    foreach($this->$dataSession as $row){
 ?>
-                        <li>Id : <?= $row['id'] ?> - Pseudo : <?= $row['pseudo'] ?> - Email : <?= $row['email'] ?>
-                        - Crée le : <?= $row['created_at'] ?>
-                        - Rôle : <?= $row['role'] ?></li>
+                        <li>Id : <?= $this->id ?> - Pseudo : <?= $this->pseudo ?> - Email : <?= $this->email ?>
+                        - Crée le : <?= $this->created_at ?>
+                        - Rôle : <?= $this->role ?></li>
 <?php
-                    }
 ?>
                 </ul>
             </main>

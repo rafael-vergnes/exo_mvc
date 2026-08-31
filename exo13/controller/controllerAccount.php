@@ -5,6 +5,6 @@ namespace Controller;
 class ControllerAccount extends Controller {
 
     public function dataToViewAccount() {
-        $this->getView()->setDataSession($_SESSION);
+        return $this->getView()->setDataSession($_SESSION['id'], $_SESSION['pseudo'], $_SESSION['email'], $_SESSION['role'], $_SESSION['createdAt']);
     }
 }

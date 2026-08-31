@@ -36,18 +36,41 @@ switch ($path) {
         $controller = new MonUser(new ModelUser(Utils::connect()), new ViewUser("Utilisateurs","./public/src/script/scriptUser.js"));
         //Formulaire de connexion
         $controller->seConnecter();
+        $controller->registerUser();
         //Rendu de l'affichage
         $controller->render();
         break;
+
     case $_ENV['articles'] :
         $controller = new ControllerArticle(new ModelArticle(Utils::connect()), new ViewArticle("Articles","./public/src/script/scriptArticle.js"));
         $controller->render();
         break;
-    case $_ENV['compte'] : 
-        $controller = new ControllerAccount(new ModelUser(Utils::connect()), new ViewAccount("Compte","./public/src/script/scriptArticle.js"));
-        $controller->dataToViewAccount();
+
+    case $_ENV['moncompte'] :
+        //Affichage de la page
+        $controller = new ControllerAccount(new ModelUser(Utils::connect()), new ViewAccount("Mon Compte",""));
         $controller->render();
         break;
+
+    case $_ENV['deconnexion'] :
+        //Destruction de la sessions
+        session_destroy();
+        //Redirection vers la page d'accueil (/MVC/ -> $_ENV['utilisateurs'])
+        //ici location permet de modifier l'url de la requête => cela produit une redirection HTTP
+        header('location:'.$_ENV['utilisateurs']);
+        exit;
+        break;
+
+    case $_ENV['test'] : //route de test pour garder les autres propres
+        //TEST DE FINDBYEMAIL() DU MODELUSER 
+        //1. Créer un objet modelUser
+        //2. Donner un l'objet un email
+        //3. Lui demander de lancer findByEmail()
+        //4. Afficher le résultat
+        $controller = new ModelUser(Utils::connect());
+        $controller->addUser();
+        break;
+        
     default:
         echo "erreur 404";
         break;
