@@ -9,10 +9,10 @@ use PDO;
 class ModelUser extends Model{
     //ATTRIBUTS
     //les attributs d'un model doivent correspondrent aux champs de la table correspondante en BDD
-    private ?int $id = 7; // le ? signifie que l'attribut a le droit d'être null
-    private ?string $pseudo = "rafael";
-    private ?string $email = "rafael.v@hotmail.com";
-    private ?string $password = "azertuty";
+    private ?int $id; // le ? signifie que l'attribut a le droit d'être null
+    private ?string $pseudo;
+    private ?string $email;
+    private ?string $password;
     private ?string $createdAt;
     private ?string $role;
 

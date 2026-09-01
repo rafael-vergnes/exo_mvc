@@ -92,7 +92,7 @@ class ControllerAccount extends Controller {
                 $this->getView()->setMessage('Ce pseudo est déjà pris');
                 return;
             }
-            $this->getModel()->setPseudo($new_pseudo)->setEmail($new_email)->setPassword(password_hash($password, PASSWORD_DEFAULT))->update();
+            $this->getModel()->setPseudo($new_pseudo)->setEmail($new_email)->setPassword(password_hash($new_password, PASSWORD_DEFAULT))->setId($_SESSION["id"])->update();
             $this->getView()->setMessage('Modifications effectuées !');
             return;
         }
